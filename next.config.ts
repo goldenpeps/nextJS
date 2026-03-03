@@ -1,8 +1,20 @@
 import type { NextConfig } from "next";
+import createMDX from "@next/mdx";
+
+const withMDX = createMDX({
+  extension: /\.mdx?$/,
+
+});
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  output: "export",
+  basePath: process.env.BASE_PATH || "",
   reactStrictMode: true,
+  trailingSlash: true,
+  images: {
+    unoptimized: true,
+  },
+  pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
 };
 
-export default nextConfig;
+export default withMDX(nextConfig);

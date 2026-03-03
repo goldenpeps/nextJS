@@ -8,7 +8,7 @@ export async function getStaticPaths() {
   const paths = websites.map((w: WebsiteType) => ({
     params: { slug: w.slug },
   }));
-  return { paths, fallback: true };
+  return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }: { params: { slug: string } }) {
@@ -18,7 +18,7 @@ export async function getStaticProps({ params }: { params: { slug: string } }) {
   );
   const currentWebsite = websites.find((w: WebsiteType) => w.slug == slug);
   console.log("currentWebsite: ", currentWebsite);
-  if (!currentWebsite) return { redirect: { destination: "/websites" } };
+  if (!currentWebsite) return { notFound: true };
 
   return { props: { website: currentWebsite } };
 }

@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "./fonts.css";
 @import "./forms.css";
+@import "./mdx.css";
 
 @theme {
   --color-dark: #222222;
