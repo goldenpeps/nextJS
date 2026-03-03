@@ -1,4 +1,4 @@
 type RegisterPageType = {};
 export default function RegisterPage({}: RegisterPageType) {
-  return "RegisterPage s";
+  return "RegisterPage";
 }
