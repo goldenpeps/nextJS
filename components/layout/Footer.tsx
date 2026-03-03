@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Logo from "../ui/Logo";
+import CookiesConsent from "./CookiesConsent";
 
 export default function Footer() {
   return (
@@ -17,7 +18,7 @@ export default function Footer() {
             <Link href="/contact">Contact</Link>
           </li>
           <li>
-            <button>Gestion des cookies</button>
+            <CookiesConsent />
           </li>
         </ul>
       </nav>

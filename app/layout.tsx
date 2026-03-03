@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import "@/styles/globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import CookiesConsent from "@/components/layout/CookiesConsent";
 
 const inter = Inter({
   weight: ["400", "700"],

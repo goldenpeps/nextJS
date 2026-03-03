@@ -1,5 +1,6 @@
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import Title from "@/components/ui/Title";
+import Video from "@/components/ui/Video";
 import Website from "@/components/ui/Website";
 import WebsiteHeader from "@/components/ui/WebsiteHeader";
 import { WebsiteType } from "@/types/Website";
@@ -40,11 +41,7 @@ export default async function HomePage() {
           Highlight
         </Title>
 
-        <figure className="rounded-lg overflow-hidden w-full max-w-280 mt-12">
-          <video controls className="w-full">
-            <source src="/highlight.mp4" type="video/mp4" />
-          </video>
-        </figure>
+        <Video id="X1_20eBd8Zg" />
       </div>
     </main>
   );
