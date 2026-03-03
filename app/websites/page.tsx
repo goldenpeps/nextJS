@@ -3,17 +3,28 @@ import Title from "@/components/ui/Title";
 import Website from "@/components/ui/Website";
 import { WebsiteType } from "@/types/Website";
 
-export async function getStaticProps() {
-  const websites = await fetch("http://localhost:3000/websites.json").then(
-    (res) => res.json(),
-  );
-  return { props: { websites } };
+export const revalidate = 3600; // Revalidate every hour
+
+async function getWebsites(): Promise<WebsiteType[]> {
+  try {
+    const res = await fetch("http://localhost:3000/websites.json", {
+      next: { revalidate: 3600 },
+    });
+    if (!res.ok) throw new Error("Failed to fetch");
+    return res.json();
+  } catch {
+    return [];
+  }
 }
 
-type WebsitesPageType = {
-  websites: WebsiteType[];
+export const metadata = {
+  title: ".com — Tous les sites web",
+  description: "Découvrez notre collection complète de sites web exceptionnels.",
 };
-export default function WebsitesPage({ websites }: WebsitesPageType) {
+
+export default async function WebsitesPage() {
+  const websites = await getWebsites();
+
   return (
     <main className="px-6 py-12">
       <Title tag="h1" topLine="Découvrez de nouveaux">

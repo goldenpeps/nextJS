@@ -4,18 +4,33 @@ import Website from "@/components/ui/Website";
 import WebsiteHeader from "@/components/ui/WebsiteHeader";
 import { WebsiteType } from "@/types/Website";
 
-export async function getStaticProps() {
-  const websites = await fetch("http://localhost:3000/websites.json").then(
-    (res) => res.json(),
-  );
-  return { props: { websites } };
+export const revalidate = 3600; // Revalidate every hour
+
+async function getWebsites(): Promise<WebsiteType[]> {
+  try {
+    const res = await fetch("http://localhost:3000/websites.json", {
+      next: { revalidate: 3600 },
+    });
+    if (!res.ok) throw new Error("Failed to fetch");
+    return res.json();
+  } catch {
+    return [];
+  }
 }
 
-type HomePageType = {
-  websites: WebsiteType[];
+export const metadata = {
+  title: ".com — Accueil",
+  description:
+    "Découvrez une collection curatée de sites web exceptionnels.",
 };
 
-export default function HomePage({ websites }: HomePageType) {
+export default async function HomePage() {
+  const websites = await getWebsites();
+
+  if (!websites.length) {
+    return <main className="flex items-center justify-center h-screen">Chargement...</main>;
+  }
+
   return (
     <main>
       <WebsiteHeader website={websites[0]} />
