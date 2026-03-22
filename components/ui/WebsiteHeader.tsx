@@ -13,7 +13,7 @@ export default function WebsiteHeader({
   return (
     <>
       <div className="px-6 py-12">
-        <header className="text-center pb-12">
+        <header className="text-center pb-12 flex flex-col gap-4">
           <time dateTime={website.first_publication_date}>
             {new Date(website.first_publication_date).toLocaleDateString(
               "fr-FR",
@@ -25,6 +25,16 @@ export default function WebsiteHeader({
             )}
           </time>
           <Title tag="h1">{website.data.title}</Title>
+          <div className="flex justify-center gap-4">
+            <span className="material-symbols-outlined cursor-pointer">
+              keep
+            </span>
+            {isFilled.link(website.data.weblink) && (
+              <a href={asLink(website.data.weblink)!} target="_blank">
+                <span className="material-symbols-outlined">open_in_new</span>
+              </a>
+            )}
+          </div>
         </header>
         <Link href={`/websites/${website.uid}`}>
           <PrismicImage field={website.data.img} className="rounded-lg" />
