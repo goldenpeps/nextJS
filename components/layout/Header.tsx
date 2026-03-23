@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import Logo from "../ui/Logo";
+import { useCountStore } from "@/app/websites/_components/count";
 
 export default function Header() {
   const router = useRouter();
   const pathname = usePathname();
   const [tag, setTag] = useState("");
+  const count = useCountStore((state) => state.getCount());
 
   useEffect(() => {
     setTag("");
@@ -52,8 +54,8 @@ export default function Header() {
             </form>
           </li>
           <li>
-            <Link href="/pins" className="flex items-center">
-              13
+            <Link href="/pins" className="flex items-center gap-1">
+              {count}
               <span className="material-symbols-outlined">keep</span>
             </Link>
           </li>
